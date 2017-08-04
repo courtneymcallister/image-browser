@@ -9,23 +9,20 @@
   </head>
   <body>
     <h3>Passage Image Browser</h3>
-
-    <div id='images'>
+    <div id="images">
+      <p>Total Pages: {{ totalPages }}</p>
+      <p>Current Page: {{ currentPage }}</p>
       <ul>
-        <li>Passage ID: {{ passage_id }}</li>
-        <li>Item Bank: {{ item_bank }}</li>
-        <li>Usable: {{ usable }}</li>
-        <li>Unusable Details: {{ unusable_details }}</li>
+        <li v-for="item in items">
+          <h4>{{ item.item_bank_name }}</h4>
+          <img src="http://via.placeholder.com/350x150" alt=""><br>
+          <a href="#">View Passage</a>
+          <p>Passage ID: {{ item.passage_id }}</p>
+          <p>Is this item usable? {{ item.is_passage_usable }}</p>
+          <p>Unusable Details: {{ item.passage_unusable_details }}</p>
+          <hr>
+        </li>
       </ul>
-    </div>
-
-    <div id="sample">
-      <h4>Item bank</h4>
-      <img src="http://via.placeholder.com/350x150" alt=""><br>
-      <a href="#">Link to item</a>
-      <p>Is this item usable? Yes</p>
-      <p>Unusable Details: (if necessary)</p>
-      <hr>
     </div>
 
     <script src="/js/app.js"></script>
