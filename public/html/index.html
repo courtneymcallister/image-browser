@@ -16,7 +16,7 @@
         <li v-for="item in items">
           <h4>{{ item.item_bank_name }}</h4>
           <img :src="item.image_name" alt=""><br>
-          <a href="'https://linode.progresstesting.com/item-bank/show/' + item.passage_id">View Passage</a>
+          <a :href="'https://linode.progresstesting.com/passage/show/' + item.passage_id" target='_blank'>View Passage</a>
           <p>Is this item usable? {{ item.is_passage_usable }}</p>
           <p>Unusable Details: {{ item.passage_unusable_details }}</p>
           <hr>
