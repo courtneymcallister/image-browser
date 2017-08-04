@@ -39,6 +39,20 @@ var images = new Vue({
       }.bind(this))
       .catch(err => console.log(err));
     },
+
+    nextPage: function(){
+      if (this.currentPage < this.totalPages) {
+        this.currentPage += 1;
+        this.getImageData(this.currentPage);
+      }
+    },
+
+    prevPage: function(){
+      if (this.currentPage > 1){
+        this.currentPage -= 1;
+        this.getImageData(this.currentPage);
+      }
+    },
   },
   created: function(){
     this.getTotalPages();

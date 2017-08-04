@@ -12,6 +12,8 @@
     <div id="images">
       <p>Total Pages: {{ totalPages }}</p>
       <p>Current Page: {{ currentPage }}</p>
+      <button v-on:click='prevPage()'>previous page</button>
+      <button v-on:click='nextPage()'>next page</button>
       <ul>
         <li v-for="item in items">
           <h4>{{ item.item_bank_name }}</h4>
