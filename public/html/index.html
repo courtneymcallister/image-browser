@@ -10,8 +10,12 @@
   <body>
     <h3>Passage Image Browser</h3>
     <div id="images">
+      <input type="checkbox" v-model="toggle">Show unusable items
       <p>Total Pages: {{ totalPages }}</p>
       <p>Current Page: {{ currentPage }}</p>
+      <p>Jump to Page: <input v-model.number="jumpTo" type="number">
+        <button v-on:click="updatePage(jumpTo)">go</button>
+      </p>
       <button v-on:click='prevPage()'>previous page</button>
       <button v-on:click='nextPage()'>next page</button>
       <ul>
@@ -19,6 +23,7 @@
           <h4>{{ item.item_bank_name }}</h4>
           <img :src="item.image_name" alt=""><br>
           <a :href="'https://linode.progresstesting.com/passage/show/' + item.passage_id" target='_blank'>View Passage</a>
+          <p>Passage ID: {{ item.passage_id }}</p>
           <p>Is this item usable? {{ item.is_passage_usable }}</p>
           <p>Unusable Details: {{ item.passage_unusable_details }}</p>
           <hr>

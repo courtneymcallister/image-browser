@@ -9,6 +9,8 @@ var images = new Vue({
     imageLink: 'image link',
     totalPages: 10000,
     currentPage: 1,
+    jumpTo: this.currentPage,
+    toggle: true,
     items: []
   },
   methods: {
@@ -28,12 +30,13 @@ var images = new Vue({
         'page_number': this.currentPage
       })
       .then(function(res){
-        console.log(res.data.image_list);
         var itemData = res.data.image_list;
         Object.keys(itemData).forEach(function(listItem){
-          images[listItem] = itemData[listItem];
-          var passageId = itemData[listItem].passage_id
-          this.imageLink = `https://linode.progresstesting.com/item-bank/show/${passageId}`;
+          //filter out passages in trash banks
+          if (itemData[listItem].is_trash_bank == false){
+            images[listItem] = itemData[listItem];
+            var passageId = itemData[listItem].passage_id
+          }
         })
         this.items = itemData;
       }.bind(this))
@@ -53,6 +56,18 @@ var images = new Vue({
         this.getImageData(this.currentPage);
       }
     },
+    updatePage: function(n){
+      if (n > 0 && n <= this.totalPages){
+        this.currentPage = n;
+        this.jumpTo = this.currentPage;
+        this.getImageData(this.currentPage);
+      }
+    },
+    showUnusableItems: function(){
+      if (this.toggle == true){
+        //do something?
+      }
+    }
   },
   created: function(){
     this.getTotalPages();
