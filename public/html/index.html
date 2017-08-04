@@ -15,9 +15,8 @@
       <ul>
         <li v-for="item in items">
           <h4>{{ item.item_bank_name }}</h4>
-          <img src="http://via.placeholder.com/350x150" alt=""><br>
-          <a href="#">View Passage</a>
-          <p>Passage ID: {{ item.passage_id }}</p>
+          <img :src="item.image_name" alt=""><br>
+          <a href="'https://linode.progresstesting.com/item-bank/show/' + item.passage_id">View Passage</a>
           <p>Is this item usable? {{ item.is_passage_usable }}</p>
           <p>Unusable Details: {{ item.passage_unusable_details }}</p>
           <hr>

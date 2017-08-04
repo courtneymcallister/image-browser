@@ -6,7 +6,7 @@ var images = new Vue({
     itemBank: 'item bank name',
     usable: 'totes usable',
     unusableDetails: 'the deets',
-    image: 'image link',
+    imageLink: 'image link',
     totalPages: 10000,
     currentPage: 1,
     items: []
@@ -32,6 +32,8 @@ var images = new Vue({
         var itemData = res.data.image_list;
         Object.keys(itemData).forEach(function(listItem){
           images[listItem] = itemData[listItem];
+          var passageId = itemData[listItem].passage_id
+          this.imageLink = `https://linode.progresstesting.com/item-bank/show/${passageId}`;
         })
         this.items = itemData;
       }.bind(this))
