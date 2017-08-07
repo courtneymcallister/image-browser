@@ -1,6 +1,6 @@
 const express = require('express');
 const server = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 const axios = require('axios');
 const cors = require('cors')
 
@@ -33,7 +33,6 @@ server.use(cors());
 // })
 // .then(res => res.data.image_list)
 // .catch(err => console.log(err));
-
 
 
 server.listen(port, function(){

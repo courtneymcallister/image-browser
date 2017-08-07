@@ -4,3 +4,15 @@ body{
 ul{
   list-style: none;
 }
+
+.nav{
+  text-align: center;
+}
+
+.nav button{
+  margin:10px;
+}
+
+.nav label{
+  font-size: 14px;
+}

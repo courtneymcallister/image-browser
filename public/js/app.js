@@ -39,6 +39,7 @@ var images = new Vue({
       if (this.currentPage < this.totalPages) {
         this.currentPage += 1;
         this.getImageData(this.currentPage);
+        scroll(0, 0);
       }
     },
 
@@ -46,6 +47,7 @@ var images = new Vue({
       if (this.currentPage > 1){
         this.currentPage -= 1;
         this.getImageData(this.currentPage);
+        scroll(0, 0);
       }
     },
     updatePage: function(n){
@@ -54,6 +56,7 @@ var images = new Vue({
         this.jumpTo = this.currentPage;
         this.getImageData(this.currentPage);
       }
+      this.jumpTo = '';
     },
 
     toggleItems: function(){
