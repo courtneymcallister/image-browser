@@ -2,16 +2,12 @@ const url = 'http://192.168.1.160/pt-dev/graphics_tool/api_passage.php'
 var images = new Vue({
   el: '#images',
   data: {
-    passageId: 'passage id',
-    itemBank: 'item bank name',
-    usable: 'totes usable',
-    unusableDetails: 'the deets',
-    imageLink: 'image link',
     totalPages: 10000,
     currentPage: 1,
     jumpTo: this.currentPage,
     toggle: true,
-    items: []
+    items: [],
+    itemType: ''
   },
   methods: {
     getTotalPages: function(){
@@ -32,11 +28,7 @@ var images = new Vue({
       .then(function(res){
         var itemData = res.data.image_list;
         Object.keys(itemData).forEach(function(listItem){
-          //filter out passages in trash banks
-          if (itemData[listItem].is_trash_bank == false){
-            images[listItem] = itemData[listItem];
-            var passageId = itemData[listItem].passage_id
-          }
+          images[listItem] = itemData[listItem];
         })
         this.items = itemData;
       }.bind(this))
@@ -63,11 +55,10 @@ var images = new Vue({
         this.getImageData(this.currentPage);
       }
     },
-    showUnusableItems: function(){
-      if (this.toggle == true){
-        //do something?
-      }
-    }
+
+    toggleItems: function(){
+      images.updatePage(this.currentPage);
+    },
   },
   created: function(){
     this.getTotalPages();

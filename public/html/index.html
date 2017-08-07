@@ -10,22 +10,27 @@
   <body>
     <h3>Passage Image Browser</h3>
     <div id="images">
-      <input type="checkbox" v-model="toggle">Show unusable items
+      <select v-model='toggle' @change='toggleItems()'>
+        <option :value=true>Show All Items</option>
+        <option :value=false>Show Usable Items Only</option>
+      </select>
+
       <p>Total Pages: {{ totalPages }}</p>
       <p>Current Page: {{ currentPage }}</p>
       <p>Jump to Page: <input v-model.number="jumpTo" type="number">
-        <button v-on:click="updatePage(jumpTo)">go</button>
+        <button @click="updatePage(jumpTo)">Go</button>
       </p>
-      <button v-on:click='prevPage()'>previous page</button>
-      <button v-on:click='nextPage()'>next page</button>
+      <button @click='prevPage()'>previous page</button>{{ currentPage }}
+      <button @click='nextPage()'>next page</button>
       <ul>
-        <li v-for="item in items">
+        <li v-for="item in items" v-show='item.is_trash_bank == false' v-if='toggle ? item : item.is_passage_usable'>
           <h4>{{ item.item_bank_name }}</h4>
           <img :src="item.image_name" alt=""><br>
           <a :href="'https://linode.progresstesting.com/passage/show/' + item.passage_id" target='_blank'>View Passage</a>
           <p>Passage ID: {{ item.passage_id }}</p>
+          <p>Is this item in a trash bank? {{ item.is_trash_bank }}</p>
           <p>Is this item usable? {{ item.is_passage_usable }}</p>
-          <p>Unusable Details: {{ item.passage_unusable_details }}</p>
+          <p v-if='item.is_passage_usable == false'>Unusable Details: {{ item.passage_unusable_details }}</p>
           <hr>
         </li>
       </ul>
